@@ -6,6 +6,6 @@ from djangoblog.utils import cache
 class Command(BaseCommand):
     help = 'clear the whole cache'
 
-    def handle(self, *args, **options):
+    def handle(self)
         cache.clear()
         self.stdout.write(self.style.SUCCESS('Cleared cache\n'))
