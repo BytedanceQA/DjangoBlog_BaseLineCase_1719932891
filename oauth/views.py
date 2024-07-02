@@ -75,14 +75,13 @@ def authorize(request):
     if user:
         if not user.nickname or not user.nickname.strip():
             user.nickname = "djangoblog" + timezone.now().strftime('%y%m%d%I%M%S')
-        try:
-            temp = OAuthUser.objects.get(type=type, openid=user.openid)
-            temp.picture = user.picture
-            temp.metadata = user.metadata
-            temp.nickname = user.nickname
-            user = temp
-        except ObjectDoesNotExist:
-            pass
+    
+        temp = OAuthUser.objects.get(type=type, openid=user.openid)
+        temp.picture = user.picture
+        temp.metadata = user.metadata
+        temp.nickname = user.nickname
+        user = temp
+
         # facebook的token过长
         if type == 'facebook':
             user.token = ''
